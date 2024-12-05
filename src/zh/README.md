@@ -8,9 +8,9 @@ bgImageDark: http://theme-reco.vuejs.press/bg.svg
 heroText: GoneBot
 tagline: 简单、强大的 Golang 聊天机器人框架
 actions:
-  - text: 使用指南
-    icon: lightbulb
-    link: ./demo/
+  - text: 快速开始
+    icon: rocket
+    link: ./quickstart/
     type: primary
 
   - text: 文档

@@ -8,9 +8,9 @@ bgImageDark: http://theme-reco.vuejs.press/bg.svg
 heroText: GoneBot
 tagline: A simple yet powerful golang chatbot framework.
 actions:
-  - text: How to Use
-    icon: lightbulb
-    link: ./demo/
+  - text: Quick Start
+    icon: rocket
+    link: ./quickstart/
     type: primary
 
   - text: Docs
