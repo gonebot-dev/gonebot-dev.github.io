@@ -1,5 +1,5 @@
 ---
-title: 常用方法
+title: 常用方法 & 约定
 icon: meteor
 order: 3
 category:
@@ -25,3 +25,42 @@ author: Kingcq
 分别从 `SendChannel` 和 `ActionChannel` 中取出一个消息或动作，用来处理，在没有消息或动作时会阻塞线程，直到有消息或动作再返回。
 
 ~~卧槽，没了~~
+
+同时，对于消息段类型和事件类型，你需要实现对应的 MessageType 方法，以方便 `GoneBot` 处理：
+```go
+// This describes a simple part of a message
+type MessageSegment struct {
+	// Message type
+	Type string `json:"type"`
+	// Make sure it implements MessageType interface
+	Data MessageType `json:"data"`
+}
+
+// Implement this to create a message type
+type MessageType interface {
+	// Which adapter is this message for
+	AdapterName() string
+	// Which message type is this message for
+	TypeName() string
+	// Convert this message segment to raw text
+	ToRawText(msg MessageSegment) string
+}
+```
+例如，`GoneBot` 内置的文本消息类型是这样实现的：
+```go
+type TextType struct {
+	Text string `json:"text"`
+}
+
+func (serializer TextType) AdapterName() string {
+	return ""
+}
+
+func (serializer TextType) TypeName() string {
+	return "text"
+}
+
+func (serializer TextType) ToRawText(msg MessageSegment) string {
+	return msg.Data.(TextType).Text
+}
+```
